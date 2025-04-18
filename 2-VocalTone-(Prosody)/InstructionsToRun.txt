@@ -1,0 +1,4 @@
+1. pip install transformers
+pip install SpeechRecognition
+
+2. 
