@@ -1,6 +1,4 @@
 import {
-  File as FileIcon,
-  Spinner,
   Trash as TrashIcon,
   Upload as UploadIcon,
 } from "@phosphor-icons/react";
@@ -8,6 +6,7 @@ import { CSSProperties, useRef, useState } from "react";
 
 import InterviewImage from "../assets/InterviewImage.png";
 import Result from "./Result";
+import Spinner from "./Spinner";
 const styles: Record<string, CSSProperties> = {
   submitButton: {
     padding: "16px 32px", // Bigger padding
@@ -52,7 +51,7 @@ function UploadVideo() {
         <div
           style={{ display: "flex", justifyContent: "center", padding: "2rem" }}
         >
-          <Spinner size={64} />
+          <Spinner />
         </div>
       ) : (
         <>
