@@ -5,6 +5,7 @@
 import React from "react";
 
 interface ResultProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   result: Record<string, any>;
 }
 
