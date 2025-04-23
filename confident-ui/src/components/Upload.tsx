@@ -1,7 +1,5 @@
-import {
-  Trash as TrashIcon,
-  Upload as UploadIcon,
-} from "@phosphor-icons/react";
+import { FaTrash as TrashIcon, FaUpload as UploadIcon } from "react-icons/fa";
+
 import { CSSProperties, useRef, useState } from "react";
 
 import InterviewImage from "../assets/InterviewImage.png";
@@ -19,7 +17,6 @@ const styles: Record<string, CSSProperties> = {
     cursor: "pointer",
   },
 };
-
 function UploadVideo() {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,13 +26,39 @@ function UploadVideo() {
   >("pending");
 
   const [videoURL, setVideoURL] = useState<string | null>(null);
+  const [result, setResult] = useState<string | null>(null);
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
+    if (!file) return;
+
     setStatus("uploading");
-    setTimeout(() => {
+
+    const formData = new FormData();
+    formData.append("video", file);
+
+    try {
+      const response = await fetch("http://localhost:5000/analyze", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        console.log("Response.ok: ", response.ok);
+        console.log("Error: ", response.statusText);
+        throw new Error("Network response was not ok");
+      }
+
+      console.log("Response: ", response);
+
+      const data = await response.json();
+      setResult(data.result);
       setStatus("success");
-    }, 2000);
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
   };
+
   return (
     <form
       onSubmit={(e) => {
@@ -45,6 +68,8 @@ function UploadVideo() {
       onReset={() => {
         setStatus("pending");
         setFile(null);
+        setVideoURL(null);
+        setResult(null);
       }}
     >
       {status === "uploading" ? (
@@ -66,19 +91,9 @@ function UploadVideo() {
             </div>
           )}
 
-          <div
-            style={styles.uploadBox}
-            onClick={() => inputRef.current?.click()}
-          >
+          <div>
             <div style={styles.content}>
-              {status === "success" && (
-                <Result
-                  result={{
-                    key: "value",
-                    key2: "value",
-                  }}
-                />
-              )}
+              {status === "success" && result && <Result result={result} />}
               {status === "error" && (
                 <p style={styles.errorText}>File upload failed!</p>
               )}
@@ -97,7 +112,10 @@ function UploadVideo() {
                 />
               )}
               <div style={{ height: "50px" }} />
-              <div style={styles.circle}>
+              <div
+                style={styles.uploadBox}
+                onClick={() => inputRef.current?.click()}
+              >
                 <UploadIcon size={32} />
               </div>
 
@@ -129,7 +147,6 @@ function UploadVideo() {
               <div style={styles.fileList}>
                 <div style={styles.fileElement}>
                   <div style={styles.filler} />
-
                   {status === "pending" && (
                     <button
                       style={styles.trash}
@@ -139,6 +156,7 @@ function UploadVideo() {
                           inputRef.current.value = "";
                         }
                         setFile(null);
+                        setVideoURL(null);
                       }}
                     >
                       <TrashIcon size={32} />
