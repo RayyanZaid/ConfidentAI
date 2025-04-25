@@ -1,4 +1,5 @@
 from summaryGeneration import generateResponseFromVideoInformation
+from analyzeProsody import analyze_prosody
 def processVideo(video_path):
     """
     Process the video file to extract frames and perform analysis.
@@ -7,7 +8,7 @@ def processVideo(video_path):
     print(f"Processing video: {video_path}")
 
     facialGestureFeedback = mockFacialGesture(video_path)
-    prosodyFeedback = mockProsodyAnalysis(video_path)
+    prosodyScore, prosodyFeedback = analyze_prosody(video_path)
     eyeContactFeedback = mockEyeContactAnalysis(video_path)
     postureFeedback = mockPostureAnalysis(video_path)
 
@@ -16,9 +17,9 @@ def processVideo(video_path):
     # Concatenate feedback into a single string
 
     finalModelFeedback = (
-        f"Facial Gesture Feedback: {facialGestureFeedback}\n"
-        f"Prosody Feedback: {prosodyFeedback}\n"
-        f"Eye Contact Feedback: {eyeContactFeedback}\n"
+        f"Facial Gesture Feedback: {facialGestureFeedback}\n\n\n"
+        f"For Prosody Feedback, you need to note the pitch, energy levels, and intensity. Don't sound robotic. If it's a high standard deviation, say it in human simple terms. Here is the feedback: You scored {prosodyScore*100}% on this interview. Here is your feedback: {prosodyFeedback}\n\n\n\n"
+        f"Eye Contact Feedback: {eyeContactFeedback}\n\n\n\n"
         f"Posture Feedback: {postureFeedback}"
     )
 
