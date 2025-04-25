@@ -1,8 +1,7 @@
 from summaryGeneration import generateResponseFromVideoInformation
 from analyzeProsody import analyze_prosody
-import sys
-sys.path.append('../ConfidentAI/3-EyeContact')
 from oneVideo import compute_eye_contact_percent, CURRENT_GOOD_EYE_CNT_PCT
+import sys
 
 def processVideo(video_path):
     """
@@ -20,6 +19,8 @@ def processVideo(video_path):
     
     # Concatenate feedback into a single string
 
+
+    # This is the prompt for LLM
     finalModelFeedback = (
         f"Facial Gesture Feedback: {facialGestureFeedback}\n\n\n"
         f"For Prosody Feedback, you need to note the pitch, energy levels, and intensity. Don't sound robotic. If it's a high standard deviation, say it in human simple terms. Here is the feedback: You scored {prosodyScore*100}% on this interview. Here is your feedback: {prosodyFeedback}\n\n\n\n"
