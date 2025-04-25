@@ -1,5 +1,9 @@
 from summaryGeneration import generateResponseFromVideoInformation
 from analyzeProsody import analyze_prosody
+import sys
+sys.path.append('../ConfidentAI/3-EyeContact')
+from oneVideo import compute_eye_contact_percent, CURRENT_GOOD_EYE_CNT_PCT
+
 def processVideo(video_path):
     """
     Process the video file to extract frames and perform analysis.
@@ -9,7 +13,7 @@ def processVideo(video_path):
 
     facialGestureFeedback = mockFacialGesture(video_path)
     prosodyScore, prosodyFeedback = analyze_prosody(video_path)
-    eyeContactFeedback = mockEyeContactAnalysis(video_path)
+    eyeContactFeedback = compute_eye_contact_percent(video_path)
     postureFeedback = mockPostureAnalysis(video_path)
 
     # Combine feedback from all analyses
@@ -19,7 +23,7 @@ def processVideo(video_path):
     finalModelFeedback = (
         f"Facial Gesture Feedback: {facialGestureFeedback}\n\n\n"
         f"For Prosody Feedback, you need to note the pitch, energy levels, and intensity. Don't sound robotic. If it's a high standard deviation, say it in human simple terms. Here is the feedback: You scored {prosodyScore*100}% on this interview. Here is your feedback: {prosodyFeedback}\n\n\n\n"
-        f"Eye Contact Feedback: {eyeContactFeedback}\n\n\n\n"
+        f"Eye Contact Feedback: If {eyeContactFeedback} is less than {CURRENT_GOOD_EYE_CNT_PCT}, then the interviee isn't maintaing eye contact enough. Give tips to improve eye contact such as being relaxed and confortable. That it's okay to glance away when speaking or thinking, but make sure to look at them when listening and making important points. Things in that nature. If the {eyeContactFeedback} is equal or more than the {CURRENT_GOOD_EYE_CNT_PCT}, then state that their eye contact maintence was good and no improvements are needed there. Make your response breif (2 sentences max) and natural, like a reviewer or teacher. \n\n\n\n"
         f"Posture Feedback: {postureFeedback}"
     )
 
