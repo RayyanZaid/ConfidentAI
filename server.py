@@ -25,7 +25,7 @@ def analyze_video():
     video.save(filepath)
 
     feedbackSummary = processVideo(filepath)
-
+    
     return jsonify({'result': feedbackSummary})
 
 if __name__ == '__main__':

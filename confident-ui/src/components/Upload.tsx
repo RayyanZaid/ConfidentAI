@@ -1,14 +1,14 @@
 import { FaTrash as TrashIcon, FaUpload as UploadIcon } from "react-icons/fa";
-
 import { CSSProperties, useRef, useState } from "react";
 
 import InterviewImage from "../assets/InterviewImage.png";
 import Result from "./Result";
 import Spinner from "./Spinner";
+
 const styles: Record<string, CSSProperties> = {
   submitButton: {
-    padding: "16px 32px", // Bigger padding
-    fontSize: "18px", // Larger font
+    padding: "16px 32px",
+    fontSize: "18px",
     fontWeight: "bold",
     borderRadius: "8px",
     border: "none",
@@ -17,6 +17,7 @@ const styles: Record<string, CSSProperties> = {
     cursor: "pointer",
   },
 };
+
 function UploadVideo() {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -26,7 +27,8 @@ function UploadVideo() {
   >("pending");
 
   const [videoURL, setVideoURL] = useState<string | null>(null);
-  const [result, setResult] = useState<string | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [result, setResult] = useState<any>(null); // 👈 treat it as any JSON object
 
   const handleUpload = async () => {
     if (!file) return;
@@ -48,10 +50,15 @@ function UploadVideo() {
         throw new Error("Network response was not ok");
       }
 
-      console.log("Response: ", response);
-
       const data = await response.json();
-      setResult(data.result);
+      const cleaned = data.result
+        .replace(/```json\n/, "") // remove ```json\n
+        .replace(/```/, "") // remove ```
+        .trim(); // extra spaces
+
+      setResult(JSON.parse(cleaned));
+
+      console.log("Result: ", result);
       setStatus("success");
     } catch (err) {
       console.error(err);

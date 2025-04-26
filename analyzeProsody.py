@@ -217,7 +217,7 @@ def generate_feedback(score, mean_pitch_sd, intensity_mean, energy):
         bad_parts.append(energy_msg)
 
     # Build feedback paragraph
-    if score >= (5 / 7):
+    if score >= (4 / 7):
         feedback += "Good prosody overall! "
         if good_parts:
             feedback += "Strengths: " + "; ".join(good_parts) + ". "

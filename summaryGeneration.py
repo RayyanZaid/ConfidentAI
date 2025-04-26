@@ -19,7 +19,14 @@ def generateResponseFromVideoInformation(videoInformation):
     prompt = f"""Your task is to create a summary based on the information given in the following sentences about the interview. 
     This information will be the tonality, seating posture, percent of eye contact maintained, and visual cues of the interviewee. 
     The summary should be in a professional tone and no more than 250 words. 
-    Based on the content per behavior, determine whether it was good or ways they should improve that aspect. Here is the information: {videoInformation}
+    Based on the content per behavior, determine whether it was good or ways they should improve that aspect. Here is the information: {videoInformation}. 
+        "Return the feedback above in a json format like this:
+        "Final Score": "",
+        "Facial Gesture Feedback": "",
+        "Prosody Feedback": "",
+        "Eye Contact Feedback": "",
+        "Posture Feedback": ""
+        
     """ 
 
     response = model.generate_content(prompt)
