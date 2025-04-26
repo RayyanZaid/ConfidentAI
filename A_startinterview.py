@@ -12,7 +12,7 @@ except ImportError:
     DIRECT_IMPORT = False
 
 # Default model path - update this to match your environment
-DEFAULT_MODEL_PATH = "/Users/sriramacharya/PycharmProjects/MIT_interview_dataset_cleaner/Extracted_Features/model_checkpoints/baseline_experiment_no_features/best_model_epoch_13.pt"
+DEFAULT_MODEL_PATH = "best_model_epoch_13.ptt"
 def mockFacialGesture(video_path, model_path=DEFAULT_MODEL_PATH):
     """
     Runs the inference helper and returns (score, feedback).
