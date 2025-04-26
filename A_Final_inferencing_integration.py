@@ -12,7 +12,7 @@ sys.path.append(current_dir)
 # Try different import approaches to handle various setup scenarios
 try:
     # Try direct import first
-    from facial_regression_inferencing_v2_with_features import (
+    from A_facial_regression_inferencing_v2_with_features import (
         ModelConfig,
         FacialGestureRegressionModel,
         safe_load_checkpoint,
