@@ -37,7 +37,7 @@ except ImportError:
         process_video_for_inference = fr.process_video_for_inference
 
 # Default model path
-DEFAULT_MODEL_PATH = "/Users/sriramacharya/PycharmProjects/MIT_interview_dataset_cleaner/Extracted_Features/model_checkpoints/baseline_experiment_no_features/best_model_epoch_13.pt"
+DEFAULT_MODEL_PATH = "best_model_epoch_13.pt"
 
 # Determine the appropriate device
 if torch.backends.mps.is_available():
