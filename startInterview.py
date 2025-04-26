@@ -1,6 +1,7 @@
 from summaryGeneration import generateResponseFromVideoInformation
 from analyzeProsody import analyze_prosody
 from oneVideo import compute_eye_contact_percent, CURRENT_GOOD_EYE_CNT_PCT
+from A_startinterview import mockFacialGesture
 import sys
 
 def processVideo(video_path):
