@@ -70,21 +70,21 @@ def posture(video_path):
     Mock function to simulate posture analysis.
     """
     def get_feedback(score, metric_name): #just general feedback
-    level = int(score * 10)
-    if level <= 1:
-        return f"{metric_name}: Severe issue detected. Needs immediate correction."
-    elif level <= 3:
-        return f"{metric_name}: Poor posture. Focus on improving this area."
-    elif level <= 5:
-        return f"{metric_name}: Needs improvement."
-    elif level <= 7:
-        return f"{metric_name}: Doing okay, but there’s room for improvement."
-    elif level <= 8:
-        return f"{metric_name}: Good posture. Stay consistent."
-    elif level <= 9:
-        return f"{metric_name}: Great job! Very stable."
-    else:
-        return f"{metric_name}: Excellent! Keep up the perfect posture."
+        level = int(score * 10)
+        if level <= 1:
+            return f"{metric_name}: Severe issue detected. Needs immediate correction."
+        elif level <= 3:
+            return f"{metric_name}: Poor posture. Focus on improving this area."
+        elif level <= 5:
+            return f"{metric_name}: Needs improvement."
+        elif level <= 7:
+            return f"{metric_name}: Doing okay, but there’s room for improvement."
+        elif level <= 8:
+            return f"{metric_name}: Good posture. Stay consistent."
+        elif level <= 9:
+            return f"{metric_name}: Great job! Very stable."
+        else:
+            return f"{metric_name}: Excellent! Keep up the perfect posture."
 
 
     mp_pose = mp.solutions.pose
