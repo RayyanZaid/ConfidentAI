@@ -51,15 +51,6 @@ def processVideo(video_path):
 
     
 
-
-
-def mockFacialGesture(video_path):
-    """
-    Mock function to simulate facial expression analysis.
-    """
-    score = 1
-    return score, "Facial expression was neutral"
-
 def mockProsodyAnalysis(video_path):
     """
     Mock function to simulate prosody analysis.
