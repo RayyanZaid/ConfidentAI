@@ -36,6 +36,32 @@ def generateResponseFromVideoInformation(videoInformation):
 
     return response.text
 
+#Baseline of just Gemini
+# def generateResponseFromVideoInformation(videoInformation):
+#     prompt = f"""Your task is to create a short summary based on analyzing 4 factors about the interview. 
+#     These factors are tonality, seating posture, percent of eye contact maintained, and visual cues of the interviewee. 
+#     For Facial Gesture Feedback, you should analyze the interviewee's facial expressions and gestures during the interview.
+#     For Prosody Feedback, you should analyze the interviewee's tone of voice, pitch, and energy levels.
+#     For Eye Contact Feedback, you should analyze the interviewee's eye contact with the interviewer.
+#     For Posture Feedback, you should analyze the interviewee's body language and posture during the interview.
+#     Determine whether the interviewee's performance in each of these areas was good or if they need to improve.
+#     The summary should be in a professional tone and no more than 250 words. 
+#     Based on the content per behavior, determine whether it was good or ways they should improve that aspect. Here is the information: {videoInformation}. 
+#         "Return the feedback above in a json format like this:
+#         "Final Score": "",
+#         "Facial Gesture Feedback": "",
+#         "Prosody Feedback": "",
+#         "Eye Contact Feedback": "",
+#         "Posture Feedback": ""
+        
+#     """ 
+
+#     response = model.generate_content(prompt)
+
+#     print("Response:\n")
+#     print(response.text)
+
+#     return response.text
 
 #step 1: download gcloud CLI via https://cloud.google.com/sdk/docs/install#windows
 #step 2: sign in through terminal, select project, and set default region
